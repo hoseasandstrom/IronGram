@@ -1,5 +1,6 @@
 package com.theironyard.controllers;
 
+import com.theironyard.entities.Photo;
 import com.theironyard.entities.User;
 import com.theironyard.services.PhotoRepository;
 import com.theironyard.services.UserRepository;
@@ -40,5 +41,12 @@ public class IronGramRestController {
     @RequestMapping(path = "/logout", method = RequestMethod.POST)
     public void logout(HttpSession session) {
         session.invalidate();
+    }
+
+    @RequestMapping(path = "/photos", method = RequestMethod.GET)
+    public Iterable<Photo> getPhotos(HttpSession session) {
+        String username = (String) session.getAttribute("username");
+        User user = users.findFirstByName(username);
+        return photos.findByRecipient(user);
     }
 }

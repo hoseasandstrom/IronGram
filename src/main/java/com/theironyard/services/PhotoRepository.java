@@ -8,5 +8,5 @@ import org.springframework.data.repository.CrudRepository;
  * Created by hoseasandstrom on 6/28/16.
  */
 public interface PhotoRepository extends CrudRepository<Photo, Integer> {
-
+        public Iterable<Photo> findByRecipient(User recipient);
 }
