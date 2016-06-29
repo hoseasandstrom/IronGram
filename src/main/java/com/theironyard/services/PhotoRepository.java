@@ -11,5 +11,7 @@ import java.util.Date;
  */
 public interface PhotoRepository extends CrudRepository<Photo, Integer> {
         public Iterable<Photo> findByRecipient(User recipient);
-        public Iterable<Photo> findByDate(Photo currentTime);
+       //public Iterable<Photo> findByDate(Photo currentTime);
+        public Iterable<Photo> findBySender(User sender);
+        public Iterable<Photo> findBySenderandMakePublic(User sender, Boolean makePublic);
 }

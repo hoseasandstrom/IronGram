@@ -32,6 +32,9 @@ public class Photo {
     Date modifiedTime;
 
     @Column(nullable = false)
+    long seconds;
+
+    @Column(nullable = false)
     Boolean modTime;
 
     @Column(nullable = false)
@@ -46,8 +49,31 @@ public class Photo {
         this.filename = filename;
     }
 
-    public Photo(int id) {
-        this.id = id;
+    public Photo(User sender, User recipient, String filename, long seconds) {
+        this.sender = sender;
+        this.recipient = recipient;
+        this.filename = filename;
+        this.seconds = seconds;
+    }
+
+    public Photo(User sender, User recipient, String filename, long seconds, Boolean makePublic) {
+        this.sender = sender;
+        this.recipient = recipient;
+        this.filename = filename;
+        this.seconds = seconds;
+        this.makePublic = makePublic;
+    }
+
+    public Photo(User sender, User recipient, String filename, Date currentTime, Date actualExpiredTime, Date modifiedTime, long seconds, Boolean modTime, Boolean makePublic) {
+        this.sender = sender;
+        this.recipient = recipient;
+        this.filename = filename;
+        this.currentTime = currentTime;
+        this.actualExpiredTime = actualExpiredTime;
+        this.modifiedTime = modifiedTime;
+        this.seconds = seconds;
+        this.modTime = modTime;
+        this.makePublic = makePublic;
     }
 
     public Photo(String filename, Date actualExpiredTime) {
@@ -101,6 +127,22 @@ public class Photo {
 
     public void setActualExpiredTime(Date actualExpiredTime) {
         this.actualExpiredTime = actualExpiredTime;
+    }
+
+    public long getSeconds() {
+        return seconds;
+    }
+
+    public void setSeconds(long seconds) {
+        this.seconds = seconds;
+    }
+
+    public Boolean getModTime() {
+        return modTime;
+    }
+
+    public void setModTime(Boolean modTime) {
+        this.modTime = modTime;
     }
 
     public Date getModifiedTime() {
