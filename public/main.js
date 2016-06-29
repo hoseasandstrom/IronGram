@@ -5,14 +5,11 @@ function getPhotos() {
     "success": function(data) {
     for (var i in data) {
         var elem = $("<img>");
-        elem.attr("src", "/photos" + data[i].filename);
+        elem.attr("src", "photos/" + data[i].filename);
         $("#photos").append(elem)
-    }
-
-
-    }
+        }
+      }
     });
-
 }
 
 

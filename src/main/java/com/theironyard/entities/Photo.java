@@ -1,6 +1,7 @@
 package com.theironyard.entities;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by hoseasandstrom on 6/28/16.
@@ -21,6 +22,21 @@ public class Photo {
     @Column(nullable = false)
     String filename;
 
+    @Column(nullable = false)
+    Date currentTime;
+
+    @Column(nullable = false)
+    Date actualExpiredTime;
+
+    @Column(nullable = false)
+    Date modifiedTime;
+
+    @Column(nullable = false)
+    Boolean modTime;
+
+    @Column(nullable = false)
+    Boolean makePublic;
+
     public Photo() {
     }
 
@@ -28,6 +44,15 @@ public class Photo {
         this.sender = sender;
         this.recipient = recipient;
         this.filename = filename;
+    }
+
+    public Photo(int id) {
+        this.id = id;
+    }
+
+    public Photo(String filename, Date actualExpiredTime) {
+        this.filename = filename;
+        this.actualExpiredTime = actualExpiredTime;
     }
 
     public int getId() {
@@ -60,5 +85,37 @@ public class Photo {
 
     public void setFilename(String filename) {
         this.filename = filename;
+    }
+
+    public Date getCurrentTime() {
+        return currentTime;
+    }
+
+    public void setCurrentTime(Date currentTime) {
+        this.currentTime = currentTime;
+    }
+
+    public Date getActualExpiredTime() {
+        return actualExpiredTime;
+    }
+
+    public void setActualExpiredTime(Date actualExpiredTime) {
+        this.actualExpiredTime = actualExpiredTime;
+    }
+
+    public Date getModifiedTime() {
+        return modifiedTime;
+    }
+
+    public void setModifiedTime(Date modifiedTime) {
+        this.modifiedTime = modifiedTime;
+    }
+
+    public Boolean getMakePublic() {
+        return makePublic;
+    }
+
+    public void setMakePublic(Boolean makePublic) {
+        this.makePublic = makePublic;
     }
 }

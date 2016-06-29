@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 
 /**
  * Created by hoseasandstrom on 6/28/16.
@@ -48,5 +49,7 @@ public class IronGramRestController {
         String username = (String) session.getAttribute("username");
         User user = users.findFirstByName(username);
         return photos.findByRecipient(user);
+
+        //public-photos
     }
 }

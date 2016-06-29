@@ -17,12 +17,18 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Date;
+import java.util.Timer;
 
 /**
  * Created by hoseasandstrom on 6/28/16.
  */
 @Controller
 public class IronGramController {
+    Timer timer;
+    public static long EXPIRED_TIME_IN_SEC = 10l;
+    public static long MODIFIED_TIME_IN_SEC;
+
     @Autowired
     UserRepository users;
 
@@ -39,8 +45,11 @@ public class IronGramController {
         String username = (String) session.getAttribute("username");
         User sender = users.findFirstByName(username);
         User rec = users.findFirstByName(receiver);
+        Date currentTime = new Date();
+        Date actualExpiredTime = new Date();
+        Date modifiedTime = new Date();
 
-        if(sender == null || rec == null) {
+        if (sender == null || rec == null) {
             throw new Exception("Can't find sender or receiver!");
         }
 
@@ -53,6 +62,30 @@ public class IronGramController {
 
         Photo photo = new Photo(sender, rec, photoFile.getName());
         photos.save(photo);
+
+
+        Iterable<Photo> photoList = photos.findAll();
+        for (Photo p : photoList) {
+            Boolean modTime = false;
+            Date byeBye = modifiedTime;
+            if (modTime = true ) {
+                modifiedTime.setTime(currentTime.getTime() - MODIFIED_TIME_IN_SEC);
+                Photo photoOnDatabase = photos.findByDate();
+                Photo photoOnDisk = new Photo("public/files/" + photoOnDatabase.getFilename(), actualExpiredTime);
+                photos.delete(photoOnDisk);
+                photos.delete(photo);
+            }
+
+            else {
+                actualExpiredTime.setTime(currentTime.getTime() - EXPIRED_TIME_IN_SEC);
+                Photo photoOnDatabase = photos.findBy;
+                Photo photoOnDisk = new Photo("public/files/" + photoOnDatabase.getFilename(), actualExpiredTime);
+                photos.delete(photoOnDisk);
+                photos.delete(photo);
+            }
+
+        }
+
 
         return "redirect:/";
 
