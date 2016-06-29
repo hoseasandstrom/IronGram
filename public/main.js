@@ -3,12 +3,13 @@ function getPhotos() {
     "type": "GET",
     "url": "/photos",
     "success": function(data) {
-    for (var i in data) {
-        var elem = $("<img>");
-        elem.attr("src", "photos/" + data[i].filename);
-        $("#photos").append(elem)
+        $("#photos").empty();
+        for (var i in data) {
+            var elem = $("<img>");
+            elem.attr("src", "photos/" + data[i].filename);
+            $("#photos").append(elem)
+            }
         }
-      }
     });
 }
 
@@ -34,6 +35,28 @@ function login() {
     });
 
 }
-
-$("#loggedin").hide();
+function logout() {
+    $.ajax({
+        "type": "POST",
+        "url": "/logout",
+        "success": function() {
+            $("#notloggedin").show(),
+            $("#loggedin").hide();
+        }
+    });
+}
+//$("#loggedin").hide();
+$.ajax({
+    "type": "GET",
+    "url": "/user",
+    "success": function(data) {
+    if(data) {
+        $("#notloggedin").hide();
+        getPhotos();
+        }
+        else {
+            $("loggedin").hide();
+        }
+    }
+});
 

@@ -78,7 +78,7 @@ public class IronGramController {
 
             else {
                 actualExpiredTime.setTime(currentTime.getTime() - EXPIRED_TIME_IN_SEC);
-                Photo photoOnDatabase = photos.findByRecipient(receiver.);
+                Photo photoOnDatabase = photos.findByRecipient(receiver);
                 Photo photoOnDisk = new Photo("public/files/" + photoOnDatabase.getFilename(), actualExpiredTime);
                 photos.delete(photoOnDisk);
                 photos.delete(photo);

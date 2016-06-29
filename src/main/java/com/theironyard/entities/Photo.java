@@ -49,31 +49,8 @@ public class Photo {
         this.filename = filename;
     }
 
-    public Photo(User sender, User recipient, String filename, long seconds) {
-        this.sender = sender;
-        this.recipient = recipient;
-        this.filename = filename;
-        this.seconds = seconds;
-    }
-
-    public Photo(User sender, User recipient, String filename, long seconds, Boolean makePublic) {
-        this.sender = sender;
-        this.recipient = recipient;
-        this.filename = filename;
-        this.seconds = seconds;
-        this.makePublic = makePublic;
-    }
-
-    public Photo(User sender, User recipient, String filename, Date currentTime, Date actualExpiredTime, Date modifiedTime, long seconds, Boolean modTime, Boolean makePublic) {
-        this.sender = sender;
-        this.recipient = recipient;
-        this.filename = filename;
-        this.currentTime = currentTime;
-        this.actualExpiredTime = actualExpiredTime;
-        this.modifiedTime = modifiedTime;
-        this.seconds = seconds;
-        this.modTime = modTime;
-        this.makePublic = makePublic;
+    public Photo(int id) {
+        this.id = id;
     }
 
     public Photo(String filename, Date actualExpiredTime) {
