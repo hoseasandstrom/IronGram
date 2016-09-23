@@ -10,8 +10,5 @@ import java.util.Date;
  * Created by hoseasandstrom on 6/28/16.
  */
 public interface PhotoRepository extends CrudRepository<Photo, Integer> {
-        public Iterable<Photo> findByRecipient(User recipient);
-       //public Iterable<Photo> findByDate(Photo currentTime);
-        public Iterable<Photo> findBySender(User sender);
-        public Iterable<Photo> findBySenderandMakePublic(User sender, Boolean makePublic);
+    public Iterable<Photo> findByRecipient(User recipient);
 }

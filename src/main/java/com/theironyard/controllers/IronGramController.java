@@ -45,9 +45,6 @@ public class IronGramController {
         String username = (String) session.getAttribute("username");
         User sender = users.findFirstByName(username);
         User rec = users.findFirstByName(receiver);
-        Date currentTime = new Date();
-        Date actualExpiredTime = new Date();
-        Date modifiedTime = new Date();
 
         if (sender == null || rec == null) {
             throw new Exception("Can't find sender or receiver!");
@@ -63,31 +60,6 @@ public class IronGramController {
         Photo photo = new Photo(sender, rec, photoFile.getName());
         photos.save(photo);
 
-
-        Iterable<Photo> photoList = photos.findAll();
-        for (Photo p : photoList) {
-            Boolean modTime = false;
-
-            if (modTime = true ) {
-                modifiedTime.setTime(currentTime.getTime() - MODIFIED_TIME_IN_SEC);
-                Photo photoOnDatabase = photos.findByRecipient();
-                Photo photoOnDisk = new Photo("public/files/" + photoOnDatabase.getFilename(), actualExpiredTime);
-                photos.delete(photoOnDisk);
-                photos.delete(photo);
-            }
-
-            else {
-                actualExpiredTime.setTime(currentTime.getTime() - EXPIRED_TIME_IN_SEC);
-                Photo photoOnDatabase = photos.findByRecipient();
-                Photo photoOnDisk = new Photo("public/files/" + photoOnDatabase.getFilename(), actualExpiredTime);
-                photos.delete(photoOnDisk);
-                photos.delete(photo);
-            }
-
-        }
-
-
         return "redirect:/";
-
     }
 }

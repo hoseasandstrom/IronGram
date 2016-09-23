@@ -27,12 +27,13 @@ public class IronGramRestController {
 
     @RequestMapping(path = "/login", method = RequestMethod.POST)
     public User login(@RequestBody User user, HttpSession session) throws Exception {
-        User userFromDataBase = users.findFirstByName(user.getName());
-        if (userFromDataBase == null) {
+        User userFromDB = users.findFirstByName(user.getName());
+        if (userFromDB == null) {
             user.setPassword(PasswordStorage.createHash(user.getPassword()));
             users.save(user);
-        } else if (!PasswordStorage.verifyPassword(user.getPassword(), userFromDataBase.getPassword())) {
-            throw new Exception ("Invalid Password");
+        }
+        else if (!PasswordStorage.verifyPassword(user.getPassword(), userFromDB.getPassword())) {
+            throw new Exception("Wrong password!");
         }
 
         session.setAttribute("username", user.getName());
@@ -49,23 +50,16 @@ public class IronGramRestController {
         String username = (String) session.getAttribute("username");
         User user = users.findFirstByName(username);
         return photos.findByRecipient(user);
-
-
     }
-    //keep the form visible
+
     @RequestMapping(path = "/user", method = RequestMethod.GET)
     public User getUser(HttpSession session) {
         String username = (String) session.getAttribute("username");
-        if (username == null){
+        if (username == null) {
             return null;
-        } else {
+        }
+        else {
             return users.findFirstByName(username);
         }
-    }
-
-    @RequestMapping(path = "/public-photos", method = RequestMethod.GET)
-    public Iterable<Photo> publicPhotos(String username) {
-        User user = users.findFirstByName(username);
-        return photos.findBySenderandMakePublic(user, true);
     }
 }
